@@ -11,6 +11,7 @@ class CampusContainer extends Component {
 
   componentDidMount() {
     this.props.fetchCampus(this.props.match.params.id);
+    console.log("props in campus" , this.props)
   }
 
   render() {
