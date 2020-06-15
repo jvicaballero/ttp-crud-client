@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const StudentView = (props) => {
     let display;
@@ -24,6 +25,11 @@ const StudentView = (props) => {
             <h3>{props.student.email}</h3>
             <img src={props.student.imageUrl} alt={props.student.firstName} width="200px" />
             
+            <div>
+            <Link className="edit-link" to={`/students/${props.student.id}/edit`}>
+        Edit Student
+      </Link>
+      </div>
             {display}
         </div>
     )

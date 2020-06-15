@@ -5,6 +5,7 @@ const FETCH_ALL_STUDENTS = "FETCH_ALL_STUDENTS";
 const ADD_STUDENT = "ADD_STUDENT";
 const DELETE_STUDENT = "DELETE_STUDENT";
 const EDIT_STUDENT = "EDIT_STUDENT";
+const ENROLL_STUDENT ="ENROLL_STUDENT"
 
 
 //ACTION CREATORS
@@ -37,6 +38,14 @@ const editStudent = (student) => {
     }
 }
 
+const enrollStudent = (student) => {
+    return {
+      type: ENROLL_STUDENT,
+      payload: student,
+    };
+  };
+  
+
 //THUNK CREATORS
 export const fetchAllStudentsThunk = () => (dispatch) => {
     return axios
@@ -67,6 +76,16 @@ export const deleteStudentThunk = (id) => (dispatch) => {
     .catch((error) => console.log(error))
 }
 
+  export const enrollStudentThunk = (campusId, studentId) => (dispatch) => {
+    return axios
+      .put(`/api/students/${studentId}`, { campusId: campusId })
+      .then((res) => res.data)
+      .then((student) => dispatch(enrollStudent(student)))
+      .catch((err) => console.log(err));
+  };
+  
+  
+
 export const editStudentThunk = (id , student, ownProps) => (dispatch) => {
     return axios
     .put(`/api/students/${id}` , student)
@@ -89,9 +108,14 @@ const reducer = (state = [], action) => {
         return state.filter((student) => student.id !== action.payload);
     case EDIT_STUDENT:
         return [...state, action.payload];
+     case ENROLL_STUDENT:
+            return state.map((student) =>
+              student.id === action.payload.id ? action.payload : student
+            );
     default:
         return state;
     }
 }
 
 export default reducer;
+
