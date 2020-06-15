@@ -20,6 +20,12 @@ const AllStudentsView = (props) => {
                 <h1>{student.firstName} {student.lastName}</h1>
                 </Link>
                 <img src={student.imageUrl} width="200px" alt={student.firstName +' ' + student.lastName}/>
+
+                <div>
+                <button onClick={() => props.handleDeleteStudent(student.id)}>Delete Student</button>
+                <button onClick={() => props.handleEditStudent(student)}>Edit Student</button>
+            </div>
+           
             </div>
         )
     )}

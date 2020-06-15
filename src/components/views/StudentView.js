@@ -8,16 +8,8 @@ const StudentView = (props) => {
         display = (
             <div>
                 <p>
-                    {props.student.campus.length} Campus: {props.student.campus.name}
+                    Campus: {props.student.campus.name}
                 </p>
-
-                {/* {props.student.campus.map((campus) => (
-                    <div key={campus.id}>{campus.name}</div>
-                ))} */}
-
-                <p></p>
-                <p></p>
-
             </div>
         )
     }
